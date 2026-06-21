@@ -5,7 +5,7 @@ import { getFirestore, collection, addDoc } from "https://www.gstatic.com/fireba
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "ТВОЙ_API_KEY",
+  apiKey: "AIzaSyDb2ZsqINOu_LjUlXdXBYQVImTZ9Ib2iVk",
   authDomain: "vitmarket-kz.firebaseapp.com",
   projectId: "vitmarket-kz",
   storageBucket: "vitmarket-kz.firebasestorage.app",
@@ -22,19 +22,19 @@ const UPLOAD_PRESET = "VITMARKET";
 
 window.publishAd = async () => {
 
-  const title = document.getElementById("title").value;
-  const price = document.getElementById("price").value;
-  const city = document.getElementById("city").value;
-  const phone = document.getElementById("phone").value;
-  const description = document.getElementById("description").value;
-  const files = document.getElementById("images").files;
-
-  if (!title) {
-    alert("Введите название");
-    return;
-  }
-
   try {
+
+    const title = document.getElementById("title").value.trim();
+    const price = document.getElementById("price").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const files = document.getElementById("images").files;
+
+    if (!title || !price || !city || !phone || !description) {
+      alert("Заполните все поля");
+      return;
+    }
 
     let imageUrls = [];
 
@@ -52,8 +52,16 @@ window.publishAd = async () => {
         }
       );
 
+      if (!response.ok) {
+        throw new Error("Ошибка загрузки фотографии");
+      }
+
       const data = await response.json();
-      imageUrls.push(data.secure_url);
+
+      if (data.secure_url) {
+        imageUrls.push(data.secure_url);
+      }
+
     }
 
     const user = auth.currentUser;
@@ -71,11 +79,13 @@ window.publishAd = async () => {
       createdAt: Date.now()
     });
 
-    alert("Объявление опубликовано!");
+    alert("Объявление опубликовано");
     location.href = "index.html";
 
   } catch (error) {
+
     alert(error.message);
+
   }
 
 };

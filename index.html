@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VITMARKET.KZ</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithRedirect,
+getRedirectResult,
+signOut,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import {
+getFirestore,
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyDb2ZsqINOu_LjUlXdXBYQVImTZ9Ib2iVk",
+authDomain:"vitmarket-kz.firebaseapp.com",
+projectId:"vitmarket-kz",
+storageBucket:"vitmarket-kz.firebasestorage.app",
+messagingSenderId:"690359698157",
+appId:"1:690359698157:web:3c8c89253faaefed9f42e4"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+getRedirectResult(auth)
+.catch((e)=>{
+console.log(e);
+});
+const provider = new GoogleAuthProvider();
+window.searchAds = ()=>{
+
+const text =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+const cards =
+document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+if(
+card.innerText.toLowerCase()
+.includes(text)
+){
+card.style.display="block";
+}
+else{
+card.style.display="none";
+}
+
+});
+
+}
+window.toggleFavorite=(el)=>{
+
+if(el.innerHTML=="🤍"){
+el.innerHTML="❤️";
+}
+else{
+el.innerHTML="🤍";
+}
+
+}
+window.login = async () => {
+
+try {
+
+await signInWithRedirect(auth, provider);
+
+} catch(e) {
+
+alert(e.message);
+
+}
+
+}
+
+window.logout = ()=>{
+
+signOut(auth);
+
+}
+
+onAuthStateChanged(auth,user=>{
+
+if(user){
+
+document.getElementById("profile").innerHTML=
+`
+<img src="${user.photoURL}"
+style="
+width:35px;
+height:35px;
+border-radius:50%;
+vertical-align:middle;
+">
+
+${user.displayName}
+`;
+
+}
+else{
+
+document.getElementById("profile").innerHTML=
+"👤 Войти";
+
+}
+
+});
+window.onload = async ()=>{
+
+const ads = document.getElementById("ads");
+
+const snapshot = await getDocs(collection(db,"ads"));
+
+snapshot.forEach(doc=>{
+
+const ad = doc.data();
+
+ads.innerHTML += `
+<div class="card">
+${ad.images && ad.images.length ?
+`
+<img
+src="${ad.images[0]}"
+style="
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:15px;
+margin-bottom:15px;
+">
+`
+:
+""
+}
+<h2>${ad.title || ""}</h2>
+
+<div class="price">
+${ad.price || 0} ₸
+</div>
+
+<div class="city">
+📍 ${ad.city || ""}
+</div>
+
+<p>
+${ad.description || ""}
+</p>
+
+<div class="cardButtons">
+<div class="favorite"
+onclick="toggleFavorite(this)">
+🤍
+</div>
+<a class="callBtn"
+href="tel:${ad.phone}">
+📞 Позвонить
+</a>
+
+<a class="whatsappBtn"
+href="https://wa.me/${ad.phone}">
+💬 WhatsApp
+</a>
+
+</div>
+
+</div>
+`;
+
+});
+
+};
+
+</script>
+
+</head>
+<body>
+
+<div class="header">
+VITMARKET.KZ
+</div>
+
+<div class="search">
+<input
+id="search"
+placeholder="🔍 Поиск по объявлениям"
+oninput="searchAds()">
+</div>
+
+<a class="addBtn" href="add.html">
+➕ Подать объявление
+</a>
+
+<div class="categories">
+
+<div class="category">
+🚗<br>Авто
+</div>
+
+<div class="category">
+🏠<br>Недвижимость
+</div>
+
+<div class="category">
+💼<br>Работа
+</div>
+
+<div class="category">
+🔨<br>Услуги
+</div>
+
+<div class="category">
+📱<br>Электроника
+</div>
+
+<div class="category">
+🏗<br>Строительство
+</div>
+
+<div class="category">
+🪑<br>Мебель
+</div>
+
+<div class="category">
+🐕<br>Животные
+</div>
+
+</div>
+
+<div id="ads"></div>
+
+<div class="bottomMenu">
+🏠
+❤️
+➕
+💬
+<div id="profile"
+onclick="login()">
+👤 Войти
+</div>
+</div>
+
+</body>
+</html>

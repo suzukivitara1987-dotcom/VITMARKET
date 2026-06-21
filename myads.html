@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мои объявления</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+getFirestore,
+collection,
+getDocs,
+deleteDoc,
+doc
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyDb2ZsqINOu_LjUlXdXBYQVImTZ9Ib2iVk",
+authDomain:"vitmarket-kz.firebaseapp.com",
+projectId:"vitmarket-kz",
+storageBucket:"vitmarket-kz.firebasestorage.app",
+messagingSenderId:"690359698157",
+appId:"1:690359698157:web:3c8c89253faaefed9f42e4"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+window.deleteAd = async(id)=>{
+
+if(!confirm("Удалить объявление?")) return;
+
+await deleteDoc(doc(db,"ads",id));
+
+location.reload();
+};
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+alert("Войдите через Google");
+location.href="index.html";
+return;
+}
+
+const adsDiv = document.getElementById("ads");
+
+const snapshot = await getDocs(collection(db,"ads"));
+
+snapshot.forEach(doc=>{
+
+const ad = doc.data();
+
+if(ad.uid===user.uid){
+
+adsDiv.innerHTML += `
+
+<div class="card">
+
+${ad.images && ad.images.length ?
+`<img class="image" src="${ad.images[0]}">`
+:
+""
+}
+
+<h2>${ad.title}</h2>
+
+<div class="price">
+${ad.price} ₸
+</div>
+
+<div class="city">
+📍 ${ad.city}
+</div>
+<div class="buttons">
+<button onclick="deleteAd('${doc.id}')">
+🗑 Удалить
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<div class="header">
+Мои объявления
+</div>
+
+<div id="ads"></div>
+
+</body>
+</html>

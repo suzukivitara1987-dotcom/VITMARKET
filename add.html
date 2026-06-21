@@ -1,173 +1,83 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подать объявление</title>
-
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f5f5f5;
-}
-
-.header{
-background:#00a651;
-color:white;
-padding:15px;
-text-align:center;
-font-size:24px;
-font-weight:bold;
-}
-
-.form{
-background:white;
-margin:15px;
-padding:20px;
-border-radius:15px;
-}
-
-input,textarea{
-width:100%;
-padding:15px;
-margin-bottom:15px;
-border:1px solid #ddd;
-border-radius:10px;
-box-sizing:border-box;
-font-size:16px;
-}
-
-button{
-width:100%;
-padding:15px;
-border:none;
-background:#00a651;
-color:white;
-font-size:18px;
-border-radius:10px;
-}
-</style>
-</head>
-<body>
-
-<div class="header">
-Подать объявление
-</div>
-
-<div class="form">
-
-<input id="title" placeholder="Название">
-
-<input id="price" type="number" placeholder="Цена">
-
-<input id="city" placeholder="Город">
-
-<input id="phone" placeholder="Телефон">
-
-<textarea id="description" placeholder="Описание"></textarea>
-<h3>Фотографии</h3>
-
-<input
-type="file"
-id="images"
-accept="image/*"
-multiple>
-<button onclick="publishAd()">
-Опубликовать
-</button>
-
-</div>
-
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-import {
-getFirestore,
-collection,
-addDoc
-}
-from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
-const firebaseConfig={
-apiKey:"AIzaSyDb2ZsqINOu_LjUlXdXBYQVImTZ9Ib2iVk",
-authDomain:"vitmarket-kz.firebaseapp.com",
-projectId:"vitmarket-kz",
-storageBucket:"vitmarket-kz.firebasestorage.app",
-messagingSenderId:"690359698157",
-appId:"1:690359698157:web:3c8c89253faaefed9f42e4"
+const firebaseConfig = {
+  apiKey: "ТВОЙ_API_KEY",
+  authDomain: "vitmarket-kz.firebaseapp.com",
+  projectId: "vitmarket-kz",
+  storageBucket: "vitmarket-kz.firebasestorage.app",
+  messagingSenderId: "690359698157",
+  appId: "1:690359698157:web:3c8c89253faaefed9f42e4"
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getFirestore(app);
-const CLOUD_NAME = "dijdrdudb";
-const UPLOAD_PRESET = "VITMARKET";
-window.publishAd=async()=>{
-
-const title=document.getElementById("title").value;
-const price=document.getElementById("price").value;
-const city=document.getElementById("city").value;
-const phone=document.getElementById("phone").value;
-const description=document.getElementById("description").value;
-const files = document.getElementById("images").files;
-let imageUrls = [];
-if(title==""){
-alert("Введите название");
-return;
-}
-
-try{
-for (let file of files) {
-
-const formData = new FormData();
-
-formData.append("file", file);
-formData.append("upload_preset", UPLOAD_PRESET);
-
-const response = await fetch(
-`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-{
-method:"POST",
-body:formData
-});
-
-const data = await response.json();
-
-imageUrls.push(data.secure_url);
-
-}
-import {getAuth}
-
-from "https://www.gstatic.com/firebasejs/11 .9.1/firebase-auth.js";
-
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 const auth = getAuth(app);
 
-const user = auth.currentUser;
-await addDoc(collection(db,"ads"),{
-title,
-price,
-city,
-phone,
-description
-images:imageUrls,
-uid:user?.uid || "",
-userName:user?.displayName || "",
-userPhoto:user?.photoURL || "",
-});
-alert("Объявление опубликовано");
+const CLOUD_NAME = "dijdrdudb";
+const UPLOAD_PRESET = "VITMARKET";
 
-location.href="index.html";
+window.publishAd = async () => {
 
-}catch(error){
+  const title = document.getElementById("title").value;
+  const price = document.getElementById("price").value;
+  const city = document.getElementById("city").value;
+  const phone = document.getElementById("phone").value;
+  const description = document.getElementById("description").value;
+  const files = document.getElementById("images").files;
 
-alert(error.message);
+  if (!title) {
+    alert("Введите название");
+    return;
+  }
 
-}
+  try {
+
+    let imageUrls = [];
+
+    for (let file of files) {
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+
+      const data = await response.json();
+      imageUrls.push(data.secure_url);
+    }
+
+    const user = auth.currentUser;
+
+    await addDoc(collection(db, "ads"), {
+      title,
+      price,
+      city,
+      phone,
+      description,
+      images: imageUrls,
+      uid: user?.uid || "",
+      userName: user?.displayName || "",
+      userPhoto: user?.photoURL || "",
+      createdAt: Date.now()
+    });
+
+    alert("Объявление опубликовано!");
+    location.href = "index.html";
+
+  } catch (error) {
+    alert(error.message);
+  }
 
 };
 
 </script>
-
-</body>
-</html>

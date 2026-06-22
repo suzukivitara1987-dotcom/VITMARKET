@@ -154,7 +154,23 @@ font-size:28px;
 cursor:pointer;
 }
 
-.card{
+.card{animation:showCard .7s;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.02);
+}
+
+@keyframes showCard{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 position:relative;
 }
 .image{

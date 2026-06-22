@@ -3,7 +3,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/11.9.1/firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "ТВОЙ_API_KEY",
+  apiKey:"AIzaSyDb2ZqINOu_LjUlXdXBYQVImTZ9Ib2iVK",
   authDomain: "vitmarket-kz.firebaseapp.com",
   projectId: "vitmarket-kz",
   storageBucket: "vitmarket-kz.firebasestorage.app",

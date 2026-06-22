@@ -103,3 +103,15 @@ let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 function saveFavorites() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
 }
+function updateFavoriteCount() {
+
+const favoriteCount =
+document.getElementById("favoriteCount");
+
+if (favoriteCount) {
+favoriteCount.innerHTML = favorites.length;
+}
+
+}
+
+updateFavoriteCount();

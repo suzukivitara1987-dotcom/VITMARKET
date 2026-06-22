@@ -363,3 +363,12 @@ border:4px solid #00a651;
 object-fit:cover;
 box-shadow:0 0 20px rgba(0,166,81,.5);
 }
+#messageCount{
+background:red;
+color:white;
+padding:5px 10px;
+border-radius:20px;
+font-size:14px;
+font-weight:bold;
+margin-left:10px;
+}

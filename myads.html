@@ -5,13 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Мои объявления</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+body{
+margin:0;
+background:#f5f5f5;
+font-family:Arial,sans-serif;
+}
+
+.header{
+background:#00a651;
+color:white;
+text-align:center;
+padding:20px;
+font-size:30px;
+font-weight:bold;
+}
+
+.ads{
+padding:15px;
+display:grid;
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.info{
+padding:15px;
+}
+
+.title{
+font-size:24px;
+font-weight:bold;
+}
+
+.price{
+font-size:28px;
+font-weight:bold;
+color:#00a651;
+margin-top:10px;
+}
+
+.city{
+color:gray;
+margin-top:10px;
+}
+
+.deleteButton{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+background:red;
+color:white;
+font-size:18px;
+border-radius:10px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+Мои объявления
+</div>
+
+<div class="ads" id="ads"></div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import {
-getFirestore,
+db
+}
+from "./firebase-config.js";
+
+import {
 collection,
 getDocs,
 deleteDoc,
@@ -19,96 +98,67 @@ doc
 }
 from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+const adsContainer=document.getElementById("ads");
 
-const firebaseConfig = {
-apiKey:"AIzaSyDb2ZsqINOu_LjUlXdXBYQVImTZ9Ib2iVk",
-authDomain:"vitmarket-kz.firebaseapp.com",
-projectId:"vitmarket-kz",
-storageBucket:"vitmarket-kz.firebasestorage.app",
-messagingSenderId:"690359698157",
-appId:"1:690359698157:web:3c8c89253faaefed9f42e4"
-};
+async function loadAds(){
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-window.deleteAd = async(id)=>{
+adsContainer.innerHTML="";
 
-if(!confirm("Удалить объявление?")) return;
+const snapshot=await getDocs(collection(db,"ads"));
 
-await deleteDoc(doc(db,"ads",id));
+snapshot.forEach((item)=>{
 
-location.reload();
-};
-onAuthStateChanged(auth, async(user)=>{
+const ad=item.data();
 
-if(!user){
-alert("Войдите через Google");
-location.href="index.html";
-return;
-}
-
-const adsDiv = document.getElementById("ads");
-
-const snapshot = await getDocs(collection(db,"ads"));
-
-snapshot.forEach(doc=>{
-
-const ad = doc.data();
-
-if(ad.uid===user.uid){
-
-adsDiv.innerHTML += `
+adsContainer.innerHTML+=`
 
 <div class="card">
 
-${ad.images && ad.images.length ?
-`<img class="image" src="${ad.images[0]}">`
-:
-""
-}
+<img src="${ad.images?.[0] || ''}">
 
-<h2>${ad.title}</h2>
+<div class="info">
+
+<div class="title">
+${ad.title}
+</div>
 
 <div class="price">
 ${ad.price} ₸
 </div>
 
 <div class="city">
-📍 ${ad.city}
+${ad.city}
 </div>
-<div class="buttons">
-<button onclick="deleteAd('${doc.id}')">
-🗑 Удалить
+
+<button class="deleteButton"
+onclick="deleteAd('${item.id}')">
+Удалить
 </button>
 
 </div>
-
 </div>
 
 `;
 
+});
+
 }
 
-});
+window.deleteAd=async(id)=>{
 
-});
+if(confirm("Удалить объявление?")){
+
+await deleteDoc(doc(db,"ads",id));
+
+loadAds();
+
+}
+
+}
+
+loadAds();
 
 </script>
-
-</head>
-
-<body>
-
-<div class="header">
-Мои объявления
-</div>
-
-<div id="ads"></div>
 
 </body>
 </html>

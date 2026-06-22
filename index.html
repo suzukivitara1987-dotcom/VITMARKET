@@ -1,4 +1,68 @@
-<!DOCTYPE html>
+<div class="ads" id="ads"></div><script type="module">
+
+import { db } from "./firebase-config.js";
+
+import {
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+const adsContainer = document.getElementById("ads");
+
+async function loadAds(){
+
+adsContainer.innerHTML="";
+
+const snapshot = await getDocs(collection(db,"ads"));
+
+snapshot.forEach(doc=>{
+
+const ad = doc.data();
+
+adsContainer.innerHTML += `
+
+<div class="card">
+
+<img src="${ad.images?.[0] || ''}">
+
+<div class="info">
+
+<div>
+
+${ad.title}
+
+</div>
+
+<div class="price">
+
+${ad.price} ₸
+
+</div>
+
+<div class="city">
+
+${ad.city}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadAds();
+
+</script>
+
+</body>
+
+</html><!DOCTYPE html>
 <html lang="ru">
 <head>
 

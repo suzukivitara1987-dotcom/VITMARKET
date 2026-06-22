@@ -355,26 +355,6 @@ cursor:pointer;
 ❤️
 
 </div>
-<div
-onclick="event.stopPropagation();addFavorite(
-'${ad.id}',
-'${ad.title}',
-'${ad.price}',
-'${ad.city}',
-'${ad.images?.[0] || ""}'
-)"
-style="
-position:absolute;
-right:15px;
-top:15px;
-font-size:30px;
-color:red;
-z-index:10;
-">
-
-❤️
-
-</div>
 ${badge}
 
 <img src="${ad.images?.[0] || ''}">

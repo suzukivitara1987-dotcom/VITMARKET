@@ -64,3 +64,8 @@ const messageCount = document.getElementById("messageCount");
 if (messageCount) {
     messageCount.innerHTML = "💬 " + newMessages;
 }
+let favoriteCount = document.getElementById("favoriteCount");
+
+if (favoriteCount) {
+    favoriteCount.innerHTML = "3";
+}

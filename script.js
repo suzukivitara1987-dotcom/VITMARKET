@@ -15,3 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+window.onload = function(){
+
+let speech = new SpeechSynthesisUtterance(
+"Добро пожаловать в Витмаркет Кей Зет. Здесь вы можете покупать и продавать товары по всему Казахстану."
+);
+
+speech.lang = "ru-RU";
+
+speechSynthesis.speak(speech);
+
+}

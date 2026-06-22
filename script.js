@@ -98,3 +98,8 @@ if (favoriteCount) {
 if(localStorage.getItem("theme")=="dark"){
 document.body.classList.add("dark");
 }
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+function saveFavorites() {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}

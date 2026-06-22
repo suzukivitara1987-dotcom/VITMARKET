@@ -57,3 +57,10 @@ let newMessages = 3;
 
 document.getElementById("messageCount").innerHTML =
 "💬 "+newMessages;
+let newMessages = 3;
+
+const messageCount = document.getElementById("messageCount");
+
+if (messageCount) {
+    messageCount.innerHTML = "💬 " + newMessages;
+}

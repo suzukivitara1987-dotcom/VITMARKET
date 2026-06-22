@@ -347,6 +347,26 @@ style="
 position:absolute;
 right:15px;
 top:15px;
+font-size:32px;
+z-index:10;
+cursor:pointer;
+">
+
+❤️
+
+</div>
+<div
+onclick="event.stopPropagation();addFavorite(
+'${ad.id}',
+'${ad.title}',
+'${ad.price}',
+'${ad.city}',
+'${ad.images?.[0] || ""}'
+)"
+style="
+position:absolute;
+right:15px;
+top:15px;
 font-size:30px;
 color:red;
 z-index:10;

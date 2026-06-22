@@ -477,6 +477,38 @@ alert("❤️ Добавлено в избранное");
 }
 
 </script>
+<script>
+
+function addFavorite(id,title,price,city,image){
+
+let favorites =
+JSON.parse(localStorage.getItem("favorites")) || [];
+
+if(favorites.find(item => item.id === id)){
+
+alert("❤️ Уже в избранном");
+return;
+
+}
+
+favorites.push({
+id,
+title,
+price,
+city,
+image
+});
+
+localStorage.setItem(
+"favorites",
+JSON.stringify(favorites)
+);
+
+alert("❤️ Добавлено в избранное");
+
+}
+
+</script>
 </body>
 
 </html>

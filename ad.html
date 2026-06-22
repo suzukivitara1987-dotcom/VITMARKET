@@ -34,6 +34,21 @@ border-radius:20px;
 background:white;
 }
 
+.thumbs{
+display:flex;
+gap:10px;
+overflow-x:auto;
+margin-top:10px;
+}
+
+.thumbs img{
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:10px;
+cursor:pointer;
+}
+
 .card{
 background:white;
 padding:20px;
@@ -64,20 +79,31 @@ font-size:20px;
 margin-top:20px;
 font-size:18px;
 line-height:1.5;
+white-space:pre-wrap;
+}
+
+.favorite{
+margin-top:20px;
+background:red;
+color:white;
+border:none;
+width:100%;
+padding:18px;
+font-size:20px;
+border-radius:15px;
 }
 
 .button{
 display:block;
 width:100%;
 padding:18px;
-margin-top:20px;
-border:none;
+margin-top:15px;
 border-radius:15px;
+text-align:center;
+text-decoration:none;
 font-size:20px;
 font-weight:bold;
 color:white;
-text-align:center;
-text-decoration:none;
 box-sizing:border-box;
 }
 
@@ -95,36 +121,74 @@ background:#25D366;
 <body>
 
 <div class="header">
+
 VITMARKET.KZ
+
 </div>
 
 <div class="container">
 
-<img id="photo" class="photo">
+<img
+id="photo"
+class="photo">
+
+<div
+class="thumbs"
+id="thumbs">
+
+</div>
 
 <div class="card">
 
-<div class="title" id="title"></div>
+<div
+class="title"
+id="title">
 
-<div class="price" id="price"></div>
+</div>
 
-<div class="city" id="city"></div>
+<div
+class="price"
+id="price">
 
-<div class="description" id="description"></div>
+</div>
 
-<a class="button phone" id="phoneButton">
+<div
+class="city"
+id="city">
+
+</div>
+
+<div
+class="description"
+id="description">
+
+</div>
+
+<button class="favorite">
+
+❤️ В избранное
+
+</button>
+
+<a
+class="button phone"
+id="phoneButton">
+
 Позвонить
+
 </a>
 
-<a class="button whatsapp" id="whatsappButton">
+<a
+class="button whatsapp"
+id="whatsappButton">
+
 WhatsApp
+
 </a>
 
 </div>
 
-</div>
-
-<script type="module">
+</div><script type="module">
 
 import { db } from "./firebase-config.js";
 
@@ -152,23 +216,46 @@ return;
 
 const ad = snap.data();
 
-document.getElementById("photo").src = ad.images?.[0] || "";
+document.getElementById("photo").src =
+ad.images?.[0] || "";
 
-document.getElementById("title").innerText = ad.title;
+const thumbs = document.getElementById("thumbs");
 
-document.getElementById("price").innerText = ad.price + " ₸";
+thumbs.innerHTML = "";
 
-document.getElementById("city").innerText = ad.city;
+ad.images?.forEach((img)=>{
 
-document.getElementById("description").innerText = ad.description;
+thumbs.innerHTML +=
+
+`<img src="${img}" onclick="changePhoto('${img}')">`;
+
+});
+
+document.getElementById("title").innerText =
+ad.title || "";
+
+document.getElementById("price").innerText =
+(ad.price || "") + " ₸";
+
+document.getElementById("city").innerText =
+ad.city || "";
+
+document.getElementById("description").innerText =
+ad.description || "";
 
 document.getElementById("phoneButton").href =
-"tel:" + ad.phone;
+"tel:" + (ad.phone || "");
 
 document.getElementById("whatsappButton").href =
-"https://wa.me/" + ad.phone;
+"https://wa.me/" + (ad.phone || "");
 
 }
+
+window.changePhoto = (img)=>{
+
+document.getElementById("photo").src = img;
+
+};
 
 loadAd();
 

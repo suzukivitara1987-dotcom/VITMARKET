@@ -26,3 +26,16 @@ speech.lang = "ru-RU";
 speechSynthesis.speak(speech);
 
 }
+function showNotification(text){
+
+const notification =
+document.getElementById("notification");
+
+notification.innerHTML = text;
+notification.classList.add("show");
+
+setTimeout(()=>{
+notification.classList.remove("show");
+},3000);
+
+}

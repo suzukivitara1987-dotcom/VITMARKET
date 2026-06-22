@@ -40,3 +40,16 @@ notification.classList.remove("show");
 
 }
 showNotification("❤️ Добро пожаловать в VITMARKET.KZ");
+const themeButton = document.getElementById("themeButton");
+
+themeButton.onclick = () => {
+
+document.body.classList.toggle("dark");
+
+if(document.body.classList.contains("dark")){
+showNotification("🌙 Тёмная тема включена");
+}else{
+showNotification("☀️ Светлая тема включена");
+}
+
+}

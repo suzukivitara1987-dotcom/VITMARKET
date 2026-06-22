@@ -75,3 +75,6 @@ let favoriteCount = document.getElementById("favoriteCount");
 if (favoriteCount) {
     favoriteCount.innerHTML = "3";
 }
+if(localStorage.getItem("theme")=="dark"){
+document.body.classList.add("dark");
+}

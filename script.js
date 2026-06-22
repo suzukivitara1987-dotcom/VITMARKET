@@ -126,3 +126,14 @@ localStorage.setItem("views", count);
 view.innerHTML = count;
 
 });
+document.querySelectorAll(".viewCount").forEach(view => {
+
+let count = localStorage.getItem("views") || 0;
+
+count++;
+
+localStorage.setItem("views", count);
+
+view.innerHTML = count;
+
+});

@@ -47,12 +47,18 @@ themeButton.onclick = () => {
 document.body.classList.toggle("dark");
 
 if(document.body.classList.contains("dark")){
+
+localStorage.setItem("theme","dark");
 showNotification("🌙 Тёмная тема включена");
+
 }else{
+
+localStorage.setItem("theme","light");
 showNotification("☀️ Светлая тема включена");
-}
 
 }
+
+};
 let newMessages = 3;
 
 document.getElementById("messageCount").innerHTML =

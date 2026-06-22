@@ -53,3 +53,7 @@ showNotification("☀️ Светлая тема включена");
 }
 
 }
+let newMessages = 3;
+
+document.getElementById("messageCount").innerHTML =
+"💬 "+newMessages;

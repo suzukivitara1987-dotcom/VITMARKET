@@ -39,3 +39,4 @@ notification.classList.remove("show");
 },3000);
 
 }
+showNotification("❤️ Добро пожаловать в VITMARKET.KZ");

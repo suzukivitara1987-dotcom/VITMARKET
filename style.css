@@ -350,3 +350,16 @@ color:white;
 .dark .bottomMenu{
 background:#1f1f1f !important;
 }
+.profileHeader{
+text-align:center;
+padding:20px;
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+border:4px solid #00a651;
+object-fit:cover;
+box-shadow:0 0 20px rgba(0,166,81,.5);
+}

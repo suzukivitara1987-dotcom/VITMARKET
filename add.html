@@ -1,93 +1,185 @@
-<script type="module">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDb2ZsqINOu_LjUlXdXBYQVImTZ9Ib2iVk",
-  authDomain: "vitmarket-kz.firebaseapp.com",
-  projectId: "vitmarket-kz",
-  storageBucket: "vitmarket-kz.firebasestorage.app",
-  messagingSenderId: "690359698157",
-  appId: "1:690359698157:web:3c8c89253faaefed9f42e4"
-};
+<title>Подать объявление - VITMARKET.KZ</title>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+<style>
 
-const CLOUD_NAME = "dijdrdudb";
-const UPLOAD_PRESET = "VITMARKET";
+body{
+margin:0;
+background:#f5f5f5;
+font-family:Arial,sans-serif;
+}
 
-window.publishAd = async () => {
+.header{
+background:#00a651;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+}
 
-  try {
+.form{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
 
-    const title = document.getElementById("title").value.trim();
-    const price = document.getElementById("price").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const description = document.getElementById("description").value.trim();
-    const files = document.getElementById("images").files;
+input,
+textarea{
 
-    if (!title || !price || !city || !phone || !description) {
-      alert("Заполните все поля");
-      return;
-    }
+width:100%;
+padding:15px;
+margin-bottom:15px;
+box-sizing:border-box;
 
-    let imageUrls = [];
+border:1px solid #ddd;
 
-    for (let file of files) {
+border-radius:10px;
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
+font-size:16px;
 
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: formData
-        }
-      );
+}
 
-      if (!response.ok) {
-        throw new Error("Ошибка загрузки фотографии");
-      }
+textarea{
 
-      const data = await response.json();
+height:120px;
 
-      if (data.secure_url) {
-        imageUrls.push(data.secure_url);
-      }
+resize:none;
 
-    }
+}
 
-    const user = auth.currentUser;
+button{
 
-    await addDoc(collection(db, "ads"), {
-      title,
-      price,
-      city,
-      phone,
-      description,
-      images: imageUrls,
-      uid: user?.uid || "",
-      userName: user?.displayName || "",
-      userPhoto: user?.photoURL || "",
-      createdAt: Date.now()
-    });
+width:100%;
 
-    alert("Объявление опубликовано");
-    location.href = "index.html";
+padding:16px;
 
-  } catch (error) {
+border:none;
 
-    alert(error.message);
+border-radius:10px;
 
-  }
+background:#00a651;
 
-};
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+.preview{
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin-top:15px;
+
+}
+
+.preview img{
+
+width:90px;
+
+height:90px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+Подать объявление
+
+</div>
+
+<div class="form">
+
+<input
+id="title"
+placeholder="Название объявления">
+
+<input
+id="price"
+type="number"
+placeholder="Цена">
+
+<input
+id="city"
+placeholder="Город">
+
+<input
+id="phone"
+placeholder="Телефон">
+
+<textarea
+id="description"
+placeholder="Описание"></textarea>
+
+<h3>Фотографии</h3>
+
+<input
+type="file"
+id="images"
+multiple
+accept="image/*">
+
+<div
+class="preview"
+id="preview"></div>
+
+<button onclick="publishAd()">
+
+Опубликовать
+
+</button>
+
+</div><script type="module">
+
+import "./firebase-config.js";
+import "./app.js";
+
+const input = document.getElementById("images");
+
+const preview = document.getElementById("preview");
+
+input.addEventListener("change", () => {
+
+preview.innerHTML = "";
+
+for (const file of input.files) {
+
+const img = document.createElement("img");
+
+img.src = URL.createObjectURL(file);
+
+preview.appendChild(img);
+
+}
+
+});
 
 </script>
+
+</body>
+
+</html>

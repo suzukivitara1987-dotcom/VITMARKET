@@ -1,4 +1,9 @@
-const clickSound = new Audio("sounds/click.mp3");
+const notifySound = new Audio("sounds/notify.mp3");
+
+function playNotify(){
+    notifySound.currentTime = 0;
+    notifySound.play();
+}const clickSound = new Audio("sounds/click.mp3");
 
 function playClick() {
     clickSound.currentTime = 0;

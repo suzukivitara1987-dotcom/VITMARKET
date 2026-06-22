@@ -45,6 +45,21 @@ notification.classList.remove("show");
 
 }
 showNotification("❤️ Добро пожаловать в VITMARKET.KZ");
+function showNotification(text){
+
+const notification =
+document.getElementById("notification");
+
+notification.innerHTML = text;
+notification.classList.add("show");
+
+playNotify();
+
+setTimeout(()=>{
+notification.classList.remove("show");
+},3000);
+
+}
 const themeButton = document.getElementById("themeButton");
 
 themeButton.onclick = () => {

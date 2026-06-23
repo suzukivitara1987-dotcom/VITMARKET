@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Объявление</title>
+
+<style>
+
+body{
+margin:0;
+background:#f5f5f5;
+font-family:Arial,sans-serif;
+}
+
+.header{
+background:#00a651;
+color:white;
+padding:20px;
+font-size:28px;
+font-weight:bold;
+text-align:center;
+}
+
+.container{
+padding:15px;
+}
+
+.photo{
+width:100%;
+height:300px;
+object-fit:cover;
+border-radius:20px;
+background:white;
+}
+
+.thumbs{
+display:flex;
+gap:10px;
+overflow-x:auto;
+margin-top:10px;
+}
+
+.thumbs img{
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:10px;
+cursor:pointer;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.title{
+font-size:28px;
+font-weight:bold;
+}
+
+.price{
+font-size:32px;
+font-weight:bold;
+color:#00a651;
+margin-top:15px;
+}
+
+.city{
+color:gray;
+margin-top:15px;
+font-size:20px;
+}
+
+.description{
+margin-top:20px;
+font-size:18px;
+line-height:1.5;
+white-space:pre-wrap;
+}
+
+.favorite{
+margin-top:20px;
+background:red;
+color:white;
+border:none;
+width:100%;
+padding:18px;
+font-size:20px;
+border-radius:15px;
+}
+
+.button{
+display:block;
+width:100%;
+padding:18px;
+margin-top:15px;
+border-radius:15px;
+text-align:center;
+text-decoration:none;
+font-size:20px;
+font-weight:bold;
+color:white;
+box-sizing:border-box;
+}
+
+.phone{
+background:#00a651;
+}
+
+.whatsapp{
+background:#25D366;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+
+VITMARKET.KZ
+
+</div>
+
+<div class="container">
+
+<img
+id="photo"
+class="photo">
+
+<div
+class="thumbs"
+id="thumbs">
+
+</div>
+
+<div class="card">
+
+<div
+class="title"
+id="title">
+
+</div>
+
+<div
+class="price"
+id="price">
+
+</div>
+
+<div
+class="city"
+id="city">
+
+</div>
+
+<div
+class="description"
+id="description">
+
+</div>
+
+<button class="favorite">
+
+❤️ В избранное
+
+</button>
+
+<a
+class="button phone"
+id="phoneButton">
+
+Позвонить
+
+</a>
+
+<a
+class="button whatsapp"
+id="whatsappButton">
+
+WhatsApp
+
+</a>
+
+</div>
+
+</div><script type="module">
+
+import { db } from "./firebase-config.js";
+
+import {
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+const params = new URLSearchParams(location.search);
+
+const id = params.get("id");
+
+async function loadAd(){
+
+const snap = await getDoc(doc(db,"ads",id));
+
+if(!snap.exists()){
+
+alert("Объявление не найдено");
+
+return;
+
+}
+
+const ad = snap.data();
+
+document.getElementById("photo").src =
+ad.images?.[0] || "";
+
+const thumbs = document.getElementById("thumbs");
+
+thumbs.innerHTML = "";
+
+ad.images?.forEach((img)=>{
+
+thumbs.innerHTML +=
+
+`<img src="${img}" onclick="changePhoto('${img}')">`;
+
+});
+
+document.getElementById("title").innerText =
+ad.title || "";
+
+document.getElementById("price").innerText =
+(ad.price || "") + " ₸";
+
+document.getElementById("city").innerText =
+ad.city || "";
+
+document.getElementById("description").innerText =
+ad.description || "";
+
+document.getElementById("phoneButton").href =
+"tel:" + (ad.phone || "");
+
+document.getElementById("whatsappButton").href =
+"https://wa.me/" + (ad.phone || "");
+
+}
+
+window.changePhoto = (img)=>{
+
+document.getElementById("photo").src = img;
+
+};
+
+loadAd();
+
+</script>
+
+</body>
+</html>

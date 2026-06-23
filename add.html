@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Подать объявление - VITMARKET.KZ</title>
+
+<style>
+
+body{
+margin:0;
+background:#f5f5f5;
+font-family:Arial,sans-serif;
+}
+
+.header{
+background:#00a651;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+}
+
+.form{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+input,
+textarea{
+
+width:100%;
+padding:15px;
+margin-bottom:15px;
+box-sizing:border-box;
+
+border:1px solid #ddd;
+
+border-radius:10px;
+
+font-size:16px;
+
+}
+
+textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+button{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:10px;
+
+background:#00a651;
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+.preview{
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin-top:15px;
+
+}
+
+.preview img{
+
+width:90px;
+
+height:90px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+Подать объявление
+
+</div>
+
+<div class="form">
+
+<input
+id="title"
+placeholder="Название объявления">
+
+<input
+id="price"
+type="number"
+placeholder="Цена">
+
+<input
+id="city"
+placeholder="Город">
+
+<input
+id="phone"
+placeholder="Телефон">
+
+<textarea
+id="description"
+placeholder="Описание"></textarea>
+
+<h3>Фотографии</h3>
+
+<input
+type="file"
+id="images"
+multiple
+accept="image/*">
+
+<div
+class="preview"
+id="preview"></div>
+
+<button onclick="publishAd()">
+
+Опубликовать
+
+</button>
+
+</div><script type="module">
+
+import "./firebase-config.js";
+import "./app.js";
+
+const input = document.getElementById("images");
+
+const preview = document.getElementById("preview");
+
+input.addEventListener("change", () => {
+
+preview.innerHTML = "";
+
+for (const file of input.files) {
+
+const img = document.createElement("img");
+
+img.src = URL.createObjectURL(file);
+
+preview.appendChild(img);
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

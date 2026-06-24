@@ -3,9 +3,9 @@
 console.log("VITMARKET.KZ запущен");
 
 // Звуки
-const clickSound = new Audio("Sounds_new/click.mp3");
-const successSound = new Audio("Sounds_new/success.mp3");
-const favoriteSound = new Audio("Sounds_new/favorite.mp3");
+const clicksound = new Audio("sounds_new/click.mp3");
+const successsound = new Audio("sounds_new/success.mp3");
+const favoritesound = new Audio("sounds_new/favorite.mp3");
 
 // Уведомление
 function showNotification(text){
@@ -29,7 +29,7 @@ function addToFavorites(name){
         JSON.stringify(favorites)
     );
 
-    favoriteSound.play();
+    favoritesound.play();
 
     showNotification("❤️ Добавлено в избранное");
 
@@ -61,7 +61,7 @@ function makeHot(adName){
         JSON.stringify(hotAds)
     );
 
-    successSound.play();
+    successsound.play();
 
     showNotification(
         "🔥 Объявление стало HOT"
@@ -78,7 +78,7 @@ function makeVip(adName){
         JSON.stringify(vipAds)
     );
 
-    successSound.play();
+    successsound.play();
 
     showNotification(
         "⭐ Объявление стало VIP"
@@ -91,7 +91,7 @@ function makeVip(adName){
 
 function boostAd(adName){
 
-    successSound.play();
+    successsound.play();
 
     showNotification(
         "🚀 Объявление поднято вверх"

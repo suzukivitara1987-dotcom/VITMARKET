@@ -432,5 +432,9 @@ showNotification(
 function paymentSystem(){
 
 showNotification(
+"💳 Оплата будет доступна скоро"
+);
 
-"💳
+}
+
+}

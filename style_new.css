@@ -280,3 +280,41 @@ transform:translateY(-10px);
 transition:0.4s;
 box-shadow:0 0 35px rgba(125,41,255,0.5);
 }
+.ads-row{
+display:flex;
+overflow-x:auto;
+gap:15px;
+padding:15px;
+}
+
+.card{
+background:#1d1234;
+min-width:220px;
+padding:10px;
+border-radius:20px;
+}
+
+.card img{
+width:100%;
+height:160px;
+border-radius:15px;
+object-fit:cover;
+}
+
+.hot{
+border:2px solid red;
+}
+
+.vip{
+border:2px solid gold;
+}
+
+.bottom-menu{
+position:fixed;
+bottom:0;
+width:100%;
+background:#1a0d2d;
+display:flex;
+justify-content:space-around;
+padding:12px;
+}

@@ -287,3 +287,150 @@ const kazakhstanRegions = [
 console.log(
 "Города Казахстана загружены"
 );
+// =======================
+// Сообщения
+// =======================
+
+let messages = [];
+
+function sendMessage(user, text){
+
+messages.push({
+
+user:user,
+
+text:text,
+
+date:new Date()
+
+});
+
+localStorage.setItem(
+
+"messages",
+
+JSON.stringify(messages)
+
+);
+
+showNotification(
+
+"💬 Сообщение отправлено"
+
+);
+
+}
+
+
+
+// =======================
+// Профиль пользователя
+// =======================
+
+let profile = {
+
+name:"",
+
+phone:"",
+
+city:"",
+
+rating:5
+
+};
+
+function saveProfile(){
+
+localStorage.setItem(
+
+"profile",
+
+JSON.stringify(profile)
+
+);
+
+showNotification(
+
+"👤 Профиль сохранён"
+
+);
+
+}
+
+
+
+// =======================
+// Загрузка избранного
+// =======================
+
+window.onload = function(){
+
+favorites = JSON.parse(
+
+localStorage.getItem("favorites")
+
+) || [];
+
+hotAds = JSON.parse(
+
+localStorage.getItem("hotAds")
+
+) || [];
+
+vipAds = JSON.parse(
+
+localStorage.getItem("vipAds")
+
+) || [];
+
+messages = JSON.parse(
+
+localStorage.getItem("messages")
+
+) || [];
+
+console.log(
+
+"VITMARKET.KZ полностью загружен"
+
+);
+
+}
+
+
+
+// =======================
+// Google Play и App Store
+// =======================
+
+function openGooglePlay(){
+
+showNotification(
+
+"📱 Android приложение скоро появится"
+
+);
+
+}
+
+function openAppStore(){
+
+showNotification(
+
+"🍎 iPhone приложение скоро появится"
+
+);
+
+}
+
+
+
+// =======================
+// Оплата
+// =======================
+
+function paymentSystem(){
+
+showNotification(
+
+"💳

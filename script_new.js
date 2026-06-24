@@ -47,3 +47,112 @@ function searchAds(){
     );
 
 }
+// HOT и VIP
+
+let hotAds = [];
+let vipAds = [];
+
+function makeHot(adName){
+
+    hotAds.push(adName);
+
+    localStorage.setItem(
+        "hotAds",
+        JSON.stringify(hotAds)
+    );
+
+    successSound.play();
+
+    showNotification(
+        "🔥 Объявление стало HOT"
+    );
+
+}
+
+function makeVip(adName){
+
+    vipAds.push(adName);
+
+    localStorage.setItem(
+        "vipAds",
+        JSON.stringify(vipAds)
+    );
+
+    successSound.play();
+
+    showNotification(
+        "⭐ Объявление стало VIP"
+    );
+
+}
+
+
+// Поднять объявление
+
+function boostAd(adName){
+
+    successSound.play();
+
+    showNotification(
+        "🚀 Объявление поднято вверх"
+    );
+
+}
+
+
+// История просмотров
+
+let viewedAds = [];
+
+function addViewed(adName){
+
+    viewedAds.push(adName);
+
+    localStorage.setItem(
+        "viewedAds",
+        JSON.stringify(viewedAds)
+    );
+
+}
+
+
+// Цены услуг
+
+const prices = {
+
+    boostOnce:490,
+
+    boostWeek:1490,
+
+    hot7:1990,
+
+    hot30:4990,
+
+    vip7:2490,
+
+    vip30:6990,
+
+    top7:3990,
+
+    top30:9990
+
+};
+
+
+// Уведомления
+
+function vipEnded(){
+
+    showNotification(
+        "⭐ Срок VIP объявления закончился"
+    );
+
+}
+
+function hotEnded(){
+
+    showNotification(
+        "🔥 Срок HOT объявления закончился"
+    );
+
+}

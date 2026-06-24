@@ -436,5 +436,3 @@ showNotification(
 );
 
 }
-
-}

@@ -524,3 +524,76 @@ font-size:15px;
 }
 
 }
+button{
+background:#8d3cff;
+color:white;
+border:none;
+border-radius:18px;
+padding:14px 20px;
+font-size:16px;
+font-weight:bold;
+transition:0.3s;
+cursor:pointer;
+}
+
+button:hover{
+background:#a75cff;
+transform:scale(1.03);
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+.ai-button{
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{
+box-shadow:0 0 10px #8d3cff;
+}
+50%{
+box-shadow:0 0 30px #8d3cff;
+}
+100%{
+box-shadow:0 0 10px #8d3cff;
+}
+}
+
+.notification{
+background:#25153f;
+padding:15px;
+margin:15px;
+border-radius:20px;
+border-left:4px solid #8d3cff;
+}
+
+.profile-card{
+background:#1d1234;
+padding:20px;
+border-radius:25px;
+margin:15px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.vip-button{
+background:gold;
+color:black;
+}
+
+.hot-button{
+background:red;
+color:white;
+}
+
+.store-card{
+background:#1d1234;
+padding:20px;
+border-radius:25px;
+margin:15px;
+}
+
+html{
+scroll-behavior:smooth;
+}

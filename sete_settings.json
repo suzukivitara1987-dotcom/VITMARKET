@@ -1,0 +1,14 @@
+{
+  "siteName": "VITMARKET.KZ",
+  "currency": "KZT",
+  "country": "Kazakhstan",
+
+  "features": {
+    "chat": true,
+    "favorites": true,
+    "aiAssistant": true,
+    "vipAds": true,
+    "hotAds": true,
+    "notifications": true
+  }
+}

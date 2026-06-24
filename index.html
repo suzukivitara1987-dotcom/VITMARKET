@@ -3,456 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>VITMARKET.KZ</title>
 
 <link rel="stylesheet" href="style_new.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+body{
+background:#12081f;
+color:white;
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+}
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+.header{
+background:#1a0d2d;
+padding:15px;
+position:sticky;
+top:0;
+z-index:100;
+}
 
+.logo{
+font-size:32px;
+font-weight:bold;
+}
+
+.logo .vit{
+color:gold;
+}
+
+.logo .market{
+color:white;
+}
+
+.logo .kz{
+color:#00d5ff;
+}
+
+.search-box{
+margin-top:15px;
+display:flex;
+gap:10px;
+}
+
+.search-box input{
+flex:1;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#25153f;
+color:white;
+font-size:16px;
+}
+
+.city{
+margin-top:15px;
+color:#aaa;
+}
+
+.categories{
+display:flex;
+overflow-x:auto;
+gap:12px;
+padding:15px;
+}
+
+.category{
+background:#24153d;
+padding:12px 18px;
+border-radius:20px;
+white-space:nowrap;
+}
+
+.add-button{
+margin:15px;
+background:#8d3cff;
+padding:16px;
+text-align:center;
+border-radius:20px;
+font-size:18px;
+font-weight:bold;
+}
+
+.ai-button{
+position:fixed;
+bottom:90px;
+right:20px;
+width:65px;
+height:65px;
+background:#8d3cff;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+box-shadow:0 0 20px #8d3cff;
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="background"></div>
-
-<header>
+<div class="header">
 
 <div class="logo">
-
-<h1>
-<span class="vit">VIT</span>
-<span class="market">MARKET</span>
-<span class="kz">.KZ</span>
-</h1>
-
-<p>Умная торговая площадка Казахстана</p>
-
+<span class="vit">VIT</span><span class="market">MARKET</span><span class="kz">.KZ</span>
 </div>
 
-<div class="top-buttons">
-
-<button class="icon-button">
-<i class="fa-solid fa-heart"></i>
-</button>
-
-<button class="icon-button">
-<i class="fa-solid fa-bell"></i>
-</button>
-
-<button class="icon-button">
-<i class="fa-solid fa-user"></i>
-</button>
-
+<div class="search-box">
+<input type="text" placeholder="Поиск товаров, услуг и вакансий">
 </div>
 
-</header>
-
-
-<div class="search-block">
-
-<input type="text"
-placeholder="🔍 Поиск товаров, услуг, автомобилей...">
-
-<select>
-
-<option>🇰🇿 Весь Казахстан</option>
-<option>Аксай ЗКО</option>
-<option>Уральск</option>
-<option>Атырау</option>
-<option>Актау</option>
-<option>Актобе</option>
-<option>Алматы</option>
-<option>Астана</option>
-<option>Шымкент</option>
-
-</select>
-
-<button class="search-btn">
-Найти
-</button>
-
-</div>
-
-
-<section class="categories">
-
-<div class="category">
-🚗
-<p>Авто</p>
-</div>
-
-<div class="category">
-🏠
-<p>Недвижимость</p>
-</div>
-
-<div class="category">
-📱
-<p>Электроника</p>
-</div>
-
-<div class="category">
-👷
-<p>Работа</p>
-</div>
-
-<div class="category">
-🔨
-<p>Строительство</p>
-</div>
-
-<div class="category">
-🚜
-<p>Спецтехника</p>
-</div>
-
-<div class="category">
-🐄
-<p>Животные</p>
-</div>
-
-<div class="category">
-🪑
-<p>Мебель</p>
-</div>
-
-<div class="category">
-👕
-<p>Одежда</p>
-</div>
-
-<div class="category">
-📦
-<p>Услуги</p>
-</div>
-
-</section>
-
-<h2 class="title">
-🔥 Горячие объявления
-</h2>
-
-<section class="ads"><div class="ad-card vip">
-
-<div class="vip-badge">
-👑 VIP
-</div>
-
-<img src="images/car1.jpg">
-
-<div class="ad-info">
-
-<h3>Toyota Camry 2023</h3>
-
-<h2>18 500 000 ₸</h2>
-
-<p>📍 Аксай ЗКО</p>
-
-<div class="ad-icons">
-<span>❤️ 27</span>
-<span>👁 152</span>
-<span>💬 5</span>
+<div class="city">
+📍 Казахстан
 </div>
 
 </div>
-</div>
 
+<div class="categories">
 
-<div class="ad-card hot">
-
-<div class="hot-badge">
-🔥 Горячее
-</div>
-<h2 class="title">⭐ VIP объявления</h2>
-
-<section class="ads">
-
-<div class="ad-card vip">
-    <div class="vip-badge">👑 VIP</div>
-
-    <img src="images/prado.jpg">
-
-    <div class="ad-info">
-        <h3>Toyota Land Cruiser Prado 2025</h3>
-        <h2>42 000 000 ₸</h2>
-        <p>📍 Алматы</p>
-
-        <div class="ad-icons">
-            <span>❤️ 53</span>
-            <span>👁 417</span>
-            <span>💬 18</span>
-        </div>
-    </div>
-</div>
-
-<div class="ad-card">
-    <img src="images/apartment1.jpg">
-
-    <div class="ad-info">
-        <h3>3-комнатная квартира</h3>
-        <h2>28 500 000 ₸</h2>
-        <p>📍 Астана</p>
-
-        <div class="ad-icons">
-            <span>❤️ 21</span>
-            <span>👁 165</span>
-            <span>💬 7</span>
-        </div>
-    </div>
-</div>
-
-</section>
-
-<h2 class="title">🚀 Премиум объявления</h2>
-
-<section class="ads">
-
-<div class="ad-card hot">
-    <div class="hot-badge">🚀 PREMIUM</div>
-
-    <img src="images/lexus.jpg">
-
-    <div class="ad-info">
-
-        <h3>Lexus LX600 2025</h3>
-
-        <h2>67 000 000 ₸</h2>
-
-        <p>📍 Алматы</p>
-
-        <div class="ad-icons">
-
-            <span>❤️ 81</span>
-
-            <span>👁 625</span>
-
-            <span>💬 24</span>
-
-        </div>
-
-    </div>
+<div class="category">Все категории</div>
+<div class="category">🚗 Авто</div>
+<div class="category">🏠 Недвижимость</div>
+<div class="category">💼 Работа</div>
+<div class="category">🔧 Услуги</div>
+<div class="category">📱 Электроника</div>
+<div class="category">🐕 Животные</div>
+<div class="category">🏗 Строительство</div>
+<div class="category">🎮 Хобби</div>
+<div class="category">🎁 Отдам даром</div>
+<div class="category">⚙ Запчасти</div>
 
 </div>
 
-<div class="ad-card">
-
-    <img src="images/actros.jpg">
-
-    <div class="ad-info">
-
-        <h3>Mercedes-Benz Actros</h3>
-
-        <h2>39 500 000 ₸</h2>
-
-        <p>📍 Астана</p>
-
-        <div class="ad-icons">
-
-            <span>❤️ 35</span>
-
-            <span>👁 213</span>
-
-            <span>💬 9</span>
-
-        </div>
-
-    </div>
-
+<div class="add-button">
+➕ Подать объявление
 </div>
 
-</section>
-<div class="ad-card">
-    <img src="images/iphone16.jpg">
+<div class="ai-button">
+🤖
+</div>
+<h2 style="padding-left:15px;">🔥 Горячие объявления</h2>
 
-    <div class="ad-info">
-        <h3>iPhone 16 Pro Max</h3>
-        <h2>850 000 ₸</h2>
-        <p>📍 Алматы</p>
+<div class="ads-row">
 
-        <div class="ad-icons">
-            <span>❤️ 32</span>
-            <span>👁 208</span>
-            <span>💬 12</span>
-        </div>
-    </div>
+<div class="card hot">
+❤️
+<img src="images/no-image.jpg">
+<h3>Toyota Camry 70</h3>
+<p>13 500 000 ₸</p>
+<span>Уральск</span>
 </div>
 
-<div class="ad-card">
-    <img src="images/house2.jpg">
-
-    <div class="ad-info">
-        <h3>Дом 180 м²</h3>
-        <h2>45 000 000 ₸</h2>
-        <p>📍 Уральск</p>
-
-        <div class="ad-icons">
-            <span>❤️ 17</span>
-            <span>👁 126</span>
-            <span>💬 6</span>
-        </div>
-    </div>
-</div>
-
-<div class="ad-card">
-    <img src="images/johndeere.jpg">
-
-    <div class="ad-info">
-        <h3>Трактор John Deere</h3>
-        <h2>18 500 000 ₸</h2>
-        <p>📍 Актобе</p>
-
-        <div class="ad-icons">
-            <span>❤️ 11</span>
-            <span>👁 94</span>
-            <span>💬 3</span>
-        </div>
-    </div>
-</div>
-
-</section>
-<img src="images/house1.jpg">
-
-<div class="ad-info">
-
-<h3>Дом 120 м²</h3>
-
-<h2>32 000 000 ₸</h2>
-
-<p>📍 Уральск</p>
-
-<div class="ad-icons">
-<span>❤️ 14</span>
-<span>👁 96</span>
-<span>💬 2</span>
-</div>
-
-</div>
-</div>
-
-
-<div class="ad-card">
-
-<img src="images/phone1.jpg">
-
-<div class="ad-info">
-
+<div class="card hot">
+❤️
+<img src="images/no-image.jpg">
 <h3>iPhone 16 Pro Max</h3>
+<p>950 000 ₸</p>
+<span>Астана</span>
+</div>
 
-<h2>850 000 ₸</h2>
-
-<p>📍 Алматы</p>
-
-<div class="ad-icons">
-<span>❤️ 32</span>
-<span>👁 208</span>
-<span>💬 12</span>
+<div class="card hot">
+❤️
+<img src="images/no-image.jpg">
+<h3>Квартира 2-комн.</h3>
+<p>23 000 000 ₸</p>
+<span>Алматы</span>
 </div>
 
 </div>
+
+
+<h2 style="padding-left:15px;">⭐ VIP объявления</h2>
+
+<div class="ads-row">
+
+<div class="card vip">
+❤️
+<img src="images/no-image.jpg">
+<h3>Lexus RX350</h3>
+<p>22 000 000 ₸</p>
+<span>Актобе</span>
 </div>
 
-</section>
-<h2 class="title">⭐ Популярные категории</h2>
-
-<div class="popular-categories">
-
-<div class="category-card">🚗 Авто</div>
-
-<div class="category-card">🏠 Недвижимость</div>
-
-<div class="category-card">📱 Телефоны</div>
-
-<div class="category-card">🚜 Спецтехника</div>
-
-<div class="category-card">🐄 Животные</div>
-
-<div class="category-card">🛠 Услуги</div>
-
-</div>
-<h2 class="title">📈 VITMARKET.KZ</h2>
-
-<div class="category-card">
-📢 Более 15 000 объявлений
+<div class="card vip">
+❤️
+<img src="images/no-image.jpg">
+<h3>Дом 180 м²</h3>
+<p>45 000 000 ₸</p>
+<span>Аксай</span>
 </div>
 
-<div class="category-card">
-👥 Более 5 000 пользователей
 </div>
 
-<div class="category-card">
-🚀 VIP и Премиум объявления
+
+<h2 style="padding-left:15px;">🆕 Новые объявления</h2>
+
+<div class="ads-row">
+
+<div class="card">
+❤️
+<img src="images/no-image.jpg">
+<h3>Samsung S25 Ultra</h3>
+<p>700 000 ₸</p>
+<span>Шымкент</span>
 </div>
 
-<div class="category-card">
-🇰🇿 Казахстан
+<div class="card">
+❤️
+<img src="images/no-image.jpg">
+<h3>Работа водителем</h3>
+<p>500 000 ₸</p>
+<span>Уральск</span>
 </div>
 
-<div class="category-card">
-© 2026 VITMARKET.KZ
-</div>
-<h2 class="title">🔥 Почему выбирают VITMARKET.KZ</h2>
-
-<div class="category-card">
-⚡ Быстрая публикация объявлений
 </div>
 
-<div class="category-card">
-💬 Общение с продавцом через чат
+
+<div class="bottom-menu">
+
+<div>🏠<br>Главная</div>
+
+<div>❤️<br>Избранное</div>
+
+<div>➕<br>Подать</div>
+
+<div>💬<br>Сообщения</div>
+
+<div>👤<br>Профиль</div>
+
 </div>
-
-<div class="category-card">
-❤️ Избранные объявления
-</div>
-
-<div class="category-card">
-🔍 Удобный поиск по Казахстану
-</div>
-
-<div class="category-card">
-🚀 VIP и Премиум продвижение
-</div>
-<div class="category-card">
-🔍 Удобный поиск по Казахстану
-</div>
-
-<div class="category-card">
-🚀 VIP и Премиум продвижение
-</div>
-<nav class="bottom-menu">
-
-<a href="#">
-<i class="fa-solid fa-house"></i>
-<p>Главная</p>
-</a>
-
-<a href="add.html">
-<i class="fa-solid fa-circle-plus"></i>
-<p>Подать</p>
-</a>
-
-<a href="favorites.html">
-<i class="fa-solid fa-heart"></i>
-<p>Избранное</p>
-</a>
-
-<a href="messages.html">
-<i class="fa-solid fa-comments"></i>
-<p>Чат</p>
-</a>
-
-<a href="profile.html">
-<i class="fa-solid fa-user"></i>
-<p>Профиль</p>
-</a>
-
-</nav>
 
 <script src="script_new.js"></script>
 
